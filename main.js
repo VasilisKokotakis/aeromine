@@ -27,15 +27,16 @@ controls.minDistance = 1; // Minimum zoom distance
 controls.maxDistance = 20; // Maximum zoom distance
 controls.enablePan = true; // Enable panning (default: true)
 
+
 // Load the glTF model
 const loader = new GLTFLoader();
 loader.load(
-    '/Models/dino/scene.gltf',
+    '/Models/Porsche/scene.gltf',
     (gltf) => {
         const model = gltf.scene;
         scene.add(model);
         model.position.set(0, 0, 0);
-        model.scale.set(0.5, 0.5, 0.5);
+        model.scale.set(1.3, 1.3, 1.3);
         model.rotation.y = Math.PI;
     },
     undefined,
