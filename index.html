@@ -1,13 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-		</style>
-	</head>
-	<body>
-		<script type="module" src="/main.js"></script>
-	</body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Model Viewer</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+
+    /* Container styling */
+    #button-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Button styling */
+    .view-button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .view-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="button-container">
+    <button class="view-button" id="perspectiveView">Perspective</button>
+    <button class="view-button" id="floorPlanView">Top</button>
+    <button class="view-button" id="frontView">Front</button>
+    <button class="view-button" id="backView">Back</button>
+    <button class="view-button" id="leftView">Left</button>
+    <button class="view-button" id="rightView">Right</button>
+    <button class="view-button" id="bottomView">Bottom</button>
+    <button class="view-button" id="animateButton">Start Animation</button>
+    <button class="view-button" id="infoButton">Info</button>
+	<button class="view-button" id="changeBgButton">Change Background</button>
+
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
 </html>
