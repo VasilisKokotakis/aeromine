@@ -27,17 +27,35 @@ controls.minDistance = 1; // Minimum zoom distance
 controls.maxDistance = 20; // Maximum zoom distance
 controls.enablePan = true; // Enable panning (default: true)
 
-
-// Load the glTF model
+// Load the glTF model with auto-scaling and centering
 const loader = new GLTFLoader();
 loader.load(
-    '/Models/Porsche/scene.gltf',
+    '/Models/alfaRomeo/scene.gltf',
     (gltf) => {
         const model = gltf.scene;
         scene.add(model);
-        model.position.set(0, 0, 0);
-        model.scale.set(1.3, 1.3, 1.3);
-        model.rotation.y = Math.PI;
+
+        // Calculate the bounding box
+        const box = new THREE.Box3().setFromObject(model);
+
+        // Get the size of the model
+        const size = new THREE.Vector3();
+        box.getSize(size);
+
+        // Get the center of the model
+        const center = new THREE.Vector3();
+        box.getCenter(center);
+
+        // Calculate scaling factor to fit the model into a specific size
+        const maxDimension = Math.max(size.x, size.y, size.z);
+        const scaleFactor = 5 / maxDimension; // Adjust the target size as needed (e.g., 2 units)
+
+        // Apply scaling and repositioning
+        model.scale.set(scaleFactor, scaleFactor, scaleFactor);
+        model.position.sub(center); // Center the model
+        model.position.y += size.y * scaleFactor * 0.5; // Lift model slightly if needed
+
+        console.log(`Model scaled with factor: ${scaleFactor}`);
     },
     undefined,
     (error) => {

@@ -1,0 +1,7 @@
+1. extend feature - θεαση (να μπορω με ενα κουμπι να εχω την κατοψη)
+2. auto-adjust scale - crusial
+3. Control buttons
+4. Button - display metadata (αρχειου) + γενικες πληροφοριες
+5. Animations - να γυρισει
+
+
