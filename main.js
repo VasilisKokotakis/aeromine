@@ -33,7 +33,8 @@ loader.load('/Models/lato/Lato_lights.gltf', (gltf) => {
   model = gltf.scene;
   scene.add(model);
 
-  // 🎯 Auto-scale and center the model
+  // 🎯 Auto-scale and center the model   
+  // THis is to trigger git   
   const box = new THREE.Box3().setFromObject(model);
   const size = new THREE.Vector3();
   box.getSize(size);
