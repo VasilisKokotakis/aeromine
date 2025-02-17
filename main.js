@@ -30,7 +30,7 @@ const loader = new GLTFLoader();
 let model;
 const markers = []; // ✅ Array to store clickable markers
 
-loader.load('/Models/lato/Lato_lights.gltf', (gltf) => {
+loader.load('/public/Models/lato/Lato_lights.gltf', (gltf) => {
   model = gltf.scene;
   scene.add(model);
 
