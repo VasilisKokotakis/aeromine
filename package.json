@@ -17,7 +17,8 @@
     "three": "^0.170.0"
   },
   "scripts": {
-    "build": "echo 'No build step required for static HTML'",
-    "dev": "npm run dev"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   }
 }
