@@ -5,6 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 // 🎯 **SCENE SETUP** 🎯
 const scene = new THREE.Scene();
 const perspectiveCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+perspectiveCamera.position.z = 5; // set the camera Z position!
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0xffffff); // ✅ Set background color to white
@@ -33,8 +34,8 @@ loader.load('/Models/lato/Lato_lights.gltf', (gltf) => {
   model = gltf.scene;
   scene.add(model);
 
-  // 🎯 Auto-scale and center the model   
-  // THis is to trigger git   
+  // 🎯 Auto-scale and center the model
+  // THis is to trigger git
   const box = new THREE.Box3().setFromObject(model);
   const size = new THREE.Vector3();
   box.getSize(size);
@@ -45,7 +46,7 @@ loader.load('/Models/lato/Lato_lights.gltf', (gltf) => {
   const scaleFactor = 0.01;
   model.scale.set(scaleFactor, scaleFactor, scaleFactor);
   model.position.set(-center.x * scaleFactor, -center.y * scaleFactor, -center.z * scaleFactor);
-  
+
   // 🏷️ **ADD MARKERS ON BUILDINGS**
   addMarker(new THREE.Vector3(0, 2, 0), "Building A", "buildingA.jpg", "This is Building A.");
   addMarker(new THREE.Vector3(5, 2, -3), "Building B", "buildingB.jpg", "This is Building B.");
