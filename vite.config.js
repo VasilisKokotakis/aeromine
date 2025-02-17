@@ -1,5 +1,5 @@
-// vite.config.js
-export default {
-    base: './', // Use relative paths for assets
-  };
-  
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  // any plugins that are needed
+});
