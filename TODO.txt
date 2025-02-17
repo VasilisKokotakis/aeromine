@@ -5,3 +5,13 @@
 5. Animations - να γυρισει
 
 
+
+
+===================================================================
+
+1. Backround - texture - υφη
+
+2. https://sketchfab.com/3d-models/katrakio-theater-in-athens-9f2cbde80262403f8c1a12e8d71518b2?fbclid=IwY2xjawG0HQZleHRuA2FlbQIxMAABHQfwht9q4vBpUN4hoavz_VHPowcuktMLgEMZBWrsvz_GwQVh_aEbmvKlXg_aem_EAdUPYmYVdsCHqw8Q8_ilQ
+- point key elements
+
+3. when user clicks in a certain key element -> then open isolated model in another tab or to do refresh 

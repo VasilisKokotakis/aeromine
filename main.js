@@ -1,4 +1,3 @@
-//SAFETY NET
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -8,7 +7,6 @@ const scene = new THREE.Scene();
 const perspectiveCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x202020);
 document.body.appendChild(renderer.domElement);
 
 // Add lighting
@@ -29,23 +27,27 @@ controls.maxDistance = 20;
 const loader = new GLTFLoader();
 let model;
 loader.load(
-  '/Models/dino/scene.gltf',
+  '/Models/lato/Lato_lights.gltf', 
   (gltf) => {
     model = gltf.scene;
     scene.add(model);
 
+    // Get model size and center
     const box = new THREE.Box3().setFromObject(model);
     const size = new THREE.Vector3();
     box.getSize(size);
     const center = new THREE.Vector3();
     box.getCenter(center);
 
-    const maxDimension = Math.max(size.x, size.y, size.z);
-    const scaleFactor = 5.5 / maxDimension;
-
+    // Scale Factor (Adjusted based on model size)
+    const scaleFactor = 0.01;
     model.scale.set(scaleFactor, scaleFactor, scaleFactor);
-    model.position.sub(center);
-    model.position.y += size.y * scaleFactor * 0.5;
+
+    // Center the model properly
+    model.position.set(-center.x * scaleFactor, -center.y * scaleFactor, -center.z * scaleFactor);
+    
+    // Adjust Y position slightly if needed
+    model.position.y += 1;
   },
   undefined,
   (error) => {
@@ -83,10 +85,10 @@ function toggleAnimation() {
 // Switch camera view function
 function switchView(view) {
   if (view === 'perspective') {
-    controls.enabled = true; // Enable OrbitControls for perspective view
+    controls.enabled = true;
     return;
   }
-  controls.enabled = false; // Disable OrbitControls for orthographic views
+  controls.enabled = false;
   const [x, y, z] = cameraPositions[view];
   orthoCamera.position.set(x, y, z);
   orthoCamera.lookAt(0, 0, 0);
@@ -97,11 +99,10 @@ function animate() {
   controls.update();
 
   if (animateModel && model) {
-    model.rotation.y += 0.01; // Rotate the model
-    model.position.x = Math.sin(Date.now() * 0.001) * 1; // Oscillate the model horizontally
+    model.rotation.y += 0.01;
+    model.position.x = Math.sin(Date.now() * 0.001) * 1;
   }
 
-  // Render the scene with the appropriate camera
   const activeCamera = controls.enabled ? perspectiveCamera : orthoCamera;
   renderer.render(scene, activeCamera);
 }
@@ -109,49 +110,48 @@ renderer.setAnimationLoop(animate);
 
 // Button Event Listeners
 document.getElementById('perspectiveView').addEventListener('click', () => {
-  controls.enabled = true; // Use perspective camera
+  controls.enabled = true;
 });
 
 document.getElementById('floorPlanView').addEventListener('click', () => {
-  controls.enabled = false; // Switch to orthographic camera (top view)
+  controls.enabled = false;
   switchView('top');
 });
 
 document.getElementById('frontView').addEventListener('click', () => {
-  controls.enabled = false; // Front view
+  controls.enabled = false;
   switchView('front');
 });
 
 document.getElementById('backView').addEventListener('click', () => {
-  controls.enabled = false; // Back view
+  controls.enabled = false;
   switchView('back');
 });
 
 document.getElementById('leftView').addEventListener('click', () => {
-  controls.enabled = false; // Left view
+  controls.enabled = false;
   switchView('left');
 });
 
 document.getElementById('rightView').addEventListener('click', () => {
-  controls.enabled = false; // Right view
+  controls.enabled = false;
   switchView('right');
 });
 
 document.getElementById('bottomView').addEventListener('click', () => {
-  controls.enabled = false; // Bottom view
+  controls.enabled = false;
   switchView('bottom');
 });
 
-// Info button functionality
 document.getElementById('infoButton').addEventListener('click', () => {
-    const modelInfoUrl = 'https://en.wikipedia.org/wiki/Dinosaur'; // Replace with your model's info URL
-    window.open(modelInfoUrl, '_blank'); // Opens the URL in a new tab
+  const modelInfoUrl = 'https://en.wikipedia.org/wiki/Dinosaur';
+  window.open(modelInfoUrl, '_blank');
 });
 
 document.getElementById('changeBgButton').addEventListener('click', () => {
-    const colors = ['white', 'lightblue', 'lightgreen', 'pink'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    renderer.setClearColor(randomColor);
+  const colors = ['white', 'lightblue', 'lightgreen', 'pink'];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  renderer.setClearColor(randomColor);
 });
-  
+
 document.getElementById('animateButton').addEventListener('click', toggleAnimation);
